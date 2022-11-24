@@ -7,25 +7,12 @@ public class Task6 {
     public static void main(String[] args) {
         int[] array = new int[]{3, -3, 7, 4, 5, 4, 3};
         Date dateStart = new Date();
-        System.out.println("Через stream: " + findByStream(array));
-        getSearchTime(dateStart, new Date());
-
-        dateStart = new Date();
         System.out.println("Через цикл while: " + findByWhile(array));
         getSearchTime(dateStart, new Date());
 
         dateStart = new Date();
         System.out.println("Через цикл for: " + findByFor(array));
         getSearchTime(dateStart, new Date());
-    }
-
-    /**
-     * Search numbers 1 and 3 in array by stream and return boolean-result
-     *
-     * @param array int array
-     */
-    public static boolean findByStream(int[] array) {
-        return Arrays.stream(array).anyMatch(x -> (x == 1) || (x == 3));
     }
 
     /**
