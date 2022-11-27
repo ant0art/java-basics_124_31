@@ -6,13 +6,9 @@ import java.util.Date;
 
 public class Task2 {
 	public static void main(String[] args) {
-		String text = "ТОПОТ";
-		Date dateStart = new Date();
+		String text = "ТопОТ";
 		System.out.println(isPalindrom(text));
-		Task6.getSearchTime(dateStart, new Date());
-		dateStart = new Date();
 		System.out.println(isPalindrom2(text));
-		Task6.getSearchTime(dateStart, new Date());
 	}
 
 	/**
@@ -23,7 +19,7 @@ public class Task2 {
 	 * @return true if word is equal vice versa
 	 */
 	public static boolean isPalindrom(String s) {
-		char[] charArray = s.toCharArray();
+		char[] charArray = s.toLowerCase().toCharArray();
 		char[] temp = new char[charArray.length];
 		String tempString = "";
 		for (int i = 0; i < charArray.length; i++) {
@@ -40,6 +36,7 @@ public class Task2 {
 	 * @return true if word is equal vice versa
 	 */
 	public static boolean isPalindrom2(String s) {
+		s = s.toLowerCase();
 		StringBuilder stringBuilder = new StringBuilder(s);
 		stringBuilder.reverse();
 		return stringBuilder.toString().equals(s);

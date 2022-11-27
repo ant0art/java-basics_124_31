@@ -1,7 +1,5 @@
 package itmo.java.basics.lesson5;
 
-import itmo.java.basics.lesson4.Task6;
-import java.util.Date;
 import java.util.Scanner;
 
 //можно решать через матчер ипаттерн
@@ -9,13 +7,10 @@ import java.util.Scanner;
 public class Task1 {
 	public static void main(String[] args) {
 		String s = "1. Написать метод для поиска самого длинного слова в тексте.";
-		Date dateStart = new Date();
 		System.out.println("The longest word found by scanner: " + getLongest(s));
-		Task6.getSearchTime(dateStart, new Date());
-		dateStart = new Date();
 		System.out.println("The longest word found by String.split: " +
 				getLongest(s, "[^а-яА-Я0-9_]"));
-		Task6.getSearchTime(dateStart, new Date());
+
 	}
 
 	/**
