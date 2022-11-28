@@ -1,21 +1,16 @@
 package itmo.java.basics.lesson6.Task5;
 
 public class Man extends User {
-	/**
-	 * Basic constructor for new man
-	 */
-	public Man() {
-		super();
-		getName();
-	}
 
-	/**
-	 * Ask man for his name
-	 */
 	@Override
-	public void getName() {
+	public String getName() {
 		System.out.print("Введите своё имя: ");
-		String name = scanner.next();
-		setUserName(name);
+		while (!scanner.hasNextLine()) {
+			if (!scanner.nextLine().isEmpty()) {
+				System.out.print("Имя должно содержать хотя бы один символ: ");
+			}
+
+		}
+		return scanner.next();
 	}
 }
