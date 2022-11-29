@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class User {
 	Scanner scanner = new Scanner(System.in);
 
+	public void getInfo() {
+		System.out.println(getAge());
+	}
+
 	public int getAge() {
 		System.out.print("Введите свой возраст: ");
 		while (!scanner.hasNextInt()) {

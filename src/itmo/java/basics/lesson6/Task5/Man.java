@@ -13,4 +13,9 @@ public class Man extends User {
 		}
 		return scanner.next();
 	}
+
+	@Override
+	public void getInfo() {
+		System.out.println(getName());
+	}
 }
