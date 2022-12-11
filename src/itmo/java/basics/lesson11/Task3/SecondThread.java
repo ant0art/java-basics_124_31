@@ -1,15 +1,26 @@
 package itmo.java.basics.lesson11.Task3;
 
-public class SecondThread implements Runnable {
-	SomeClass someClass;
+import java.util.concurrent.CountDownLatch;
 
-	public SecondThread(SomeClass someClass) {
+public class SecondThread implements Runnable {
+	private SomeClass someClass;
+	private CountDownLatch countDownLatch;
+
+
+	public SecondThread(SomeClass someClass, CountDownLatch countDownLatch) {
 		this.someClass = someClass;
+		this.countDownLatch = countDownLatch;
 	}
 
 	@Override
 	public void run() {
-		while(true) {
+		try {
+			Thread.sleep(2000);
+			countDownLatch.await();
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		while (true) {
 			someClass.getCount();
 		}
 	}

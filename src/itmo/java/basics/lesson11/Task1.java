@@ -1,8 +1,24 @@
 package itmo.java.basics.lesson11;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Task1 {
 	public static void main(String[] args) {
-		startThread(10);
+		List<Thread> threadList = makeThreads(10);
+
+		for (Thread thread : threadList) {
+			thread.start();
+		}
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (Thread thread : threadList) {
+			System.out.println(thread.getName() + " " + thread.getState());
+
+		}
 	}
 
 	/**
@@ -10,38 +26,39 @@ public class Task1 {
 	 * It must show stage of thread in working time while counting from 0 to 100
 	 */
 	public static class SomeThread implements Runnable {
-		private String name;
 		public static int count;
 
-		@Override
-		public String toString() {
-			return "SomeThread #" + name;
-		}
-
 		public SomeThread() {
-			this.name = "" + count++;
 		}
 
 		@Override
 		public void run() {
-			System.out.println(this + " started");
-			for (int i = 0; i < 100; i++) {
-				System.out.println(this + " count to " + i);
+			Thread thread = Thread.currentThread();
+			for (int i = 0; i < 10; i++) {
+				System.out.println(thread.getName() + " count to " + i);
 			}
-			System.out.println(this + " finished");
+			System.out.println(
+					thread.getName() + " " + thread.isAlive() + " " + thread.getState());
 		}
 	}
 
 	/**
-	 * Start N-number threads
+	 * Get list of N-number threads of {@link itmo.java.basics.lesson11.Task1.SomeThread}
 	 *
 	 * @param count quantity of started threads
+	 * @return List of Threads
+	 * @see itmo.java.basics.lesson11.Task1.SomeThread
+	 * <code>class
+	 * SomeThread</code>
 	 */
-	public static void startThread(Integer count) {
+	public static List<Thread> makeThreads(Integer count) {
+		List<Thread> threadList = new ArrayList<>();
 		for (int i = 1; i <= count; i++) {
 			SomeThread someThread = new SomeThread();
-			System.out.println(someThread.toString() + " before start");
-			new Thread(someThread).start();
+			Thread thread = new Thread(someThread);
+			threadList.add(thread);
+			System.out.println(thread.getName() + " " + thread.getState());
 		}
+		return threadList;
 	}
 }
