@@ -1,4 +1,4 @@
-package itmo.java.basics.lesson11.Task2;
+package itmo.java.basics.lesson11.Task3;
 
 public class Counter {
 	int count = 0;

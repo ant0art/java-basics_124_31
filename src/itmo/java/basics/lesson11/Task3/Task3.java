@@ -1,35 +1,51 @@
 package itmo.java.basics.lesson11.Task3;
 
-import java.util.concurrent.CountDownLatch;
-
 public class Task3 {
 
-	static CountDownLatch countDownLatch = new CountDownLatch(1);
 
 	public static void main(String[] args) {
-		SomeClass someClass = new SomeClass();
-		FirstThread firstThread = new FirstThread(someClass, countDownLatch);
-		SecondThread secondThread = new SecondThread(someClass, countDownLatch);
-		Thread thread1 = new Thread(firstThread);
-		Thread thread2 = new Thread(secondThread);
-		startThreads();
-		thread1.start();
-		thread2.start();
+		startThread(100);
 	}
 
-	public static void startThreads() {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	/**
+	 * Thread of the Task 3.
+	 * Every start of 100 threads must show counter as 100000
+	 */
+	public static class SomeThread implements Runnable {
+		static Counter counter = new Counter();
+		private String name;
+		public static int count;
+
+
+		public SomeThread() {
+			this.name = "" + count++;
 		}
-		System.out.println(Thread.currentThread().getName() + " started");
-		countDownLatch.countDown();
-		System.out.println(
-				"Счётчик действий до запуска потоков = " + countDownLatch.getCount());
+
+		@Override
+		public String toString() {
+			return "SomeThread #" + name;
+		}
+
+		@Override
+		public void run() {
+			for (int i = 1; i <= 1000; i++) {
+				synchronized (counter) {
+					counter.increment();
+				}
+				System.out.println(this + " increase counter to " + counter.getCount());
+			}
+		}
+	}
+
+	/**
+	 * Start N-number threads
+	 *
+	 * @param count quantity of started threads
+	 */
+	public static void startThread(Integer count) {
+		for (int i = 1; i <= count; i++) {
+			SomeThread someThread = new SomeThread();
+			new Thread(someThread).start();
+		}
 	}
 }
-
-
-
-

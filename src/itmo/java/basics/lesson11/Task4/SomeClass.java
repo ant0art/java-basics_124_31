@@ -1,4 +1,4 @@
-package itmo.java.basics.lesson11.Task3;
+package itmo.java.basics.lesson11.Task4;
 
 public class SomeClass {
 
